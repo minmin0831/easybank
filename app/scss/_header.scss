@@ -1,0 +1,133 @@
+.header {
+
+    // Hamburger Open styles
+    &.open {
+
+        .header__toggle { // Hamburger 버튼을 눌렀을 때, header__menu (햄버거 메뉴)에 다음과 같은 애니메이션이 발생한다. (닫기 표시인 X 모양)
+            > span:first-child {
+                transform: rotate(45deg);
+            }
+    
+            > span:nth-child(2) {
+                opacity: 0;
+            }
+    
+            > span:last-child {
+                transform: rotate(-45deg);
+            }
+        }
+    }
+
+    .overlay {
+        // overlay가 처음에는 보여지 않게 한다. 
+        display: none;
+        position: fixed;
+        top: 0rem;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        background-color: $darkBlue;
+        background: linear-gradient($darkBlue, transparent);
+
+        // 햄버거 메뉴를 누르면 fade-in만 구동한다. 그리고 header__menu 가 보여진다. (자바스크립트로 동작)
+        &.fade-in {
+            display: block; 
+            // display property는 animation할 수 없다. 때문에 _animation 에서 keyframe 코드에 속성을 정의하지 않도록 한다. 
+        }
+
+        &.fade-out {
+            display: none;
+        }
+    }
+
+    nav {
+        // position 및 background-color를 설정하여 overlay가 올라왔을 때, nav bar가 구분되어 보일 수 있도록 한다. 
+        position: relative;
+        background-color: $white;
+        // nav 영역의 위 아래 padding을 따로 부여한다. (_globals의 container(spacing) 참고.)
+        padding-top: 1.0625rem; 
+        padding-bottom: 1.0625rem; 
+    }
+
+    &__logo {
+
+        img {
+            width: 8.8125rem;
+            height: 1.375rem;
+        }
+
+    }
+
+    &__toggle { // Mobile Menu Toggle
+
+        > span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background-color: $darkBlue;
+            transition: all 300ms ease-in-out;
+            transform-origin: 5px 1px;
+
+            &:not(:last-child) { // as long as it is not last-child, the command line will apply. 
+                margin-bottom: 3px;
+            }
+        }
+    }
+
+    &__menu {
+        position: absolute;
+        z-index: 1;
+        width: calc(100% - 3rem);
+        left: 50%;
+        transform: translateX(-50%);
+        background: $white;
+        margin-top: 1.5rem;
+        padding: 1.625rem;
+        border-radius: 3px;
+        
+        a {
+            display: block;
+            padding: 0.625rem;
+            color: $darkBlue;
+            text-decoration: none;
+            text-align: center;
+        }
+    }
+
+    &__links {
+
+        a {
+            position: relative; // 부모 태그인 links (a태그)를 relative로 지정해놓고 before라는 pseudo-element를 만들고 이것을 자식 태그로 이용한다. 
+            text-decoration: none;
+            font-size: $font-sm;
+            color: $grayishBlue;
+            transition: color 300ms ease-in-out;
+
+            &:not(:last-child) { // as long as it is not last-child, the command line will apply. 
+                margin-right: 32px;
+            }
+
+            &::before { // 자식 태그로 사용되는 pseudo-element이며, position을 absolute로 지정하여 부모 태그에 붙어있도록 만든다. 
+                content: "";
+                display: block;
+                position: absolute;
+                height: 5px;
+                color: $limeGreen;
+                left: 0;
+                right: 0;
+                bottom: -30px;
+                background: linear-gradient(to right, $limeGreen, $brightCyan);
+                opacity: 0;
+                transition: opacity 300ms ease-in-out;
+            }
+
+            &:hover {
+                color: $darkBlue;
+
+                &::before {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

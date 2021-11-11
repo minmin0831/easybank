@@ -1,0 +1,189 @@
+html {
+    font-size: 100%;
+    box-sizing: border-box;
+    // padding and border is included in an element's total width and height. 
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+// HTML 전체에 위 스타일을 적용하라는 의미이다. 
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Public Sans', sans-serif;
+    font-size: $font-sm;
+    font-weight: 300; // 텍스트 굵기를 정의. 
+    color: $grayishBlue;
+    line-height: 1.3;
+    //min-height: auto; // 사이트의 최소 높이를 정한다. 단위는 vh (viewport height)이다. 
+
+    &.noscroll {
+        // hamburger menu를 띄웠을 때, scroll이 움직이지 않도록 고정한다. 
+        overflow: hidden;
+    }
+
+    @include breakpoint-up(large) {
+        font-size: $font-med;
+    }
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+    font-weight: 300;
+    line-height: 1.15;
+    color: $darkBlue;
+}
+
+h1 {
+    font-size: 2.31rem;
+    margin-bottom: 2.25rem;
+
+    @include breakpoint-up(large) {
+        font-size: $font-xlg;
+    }
+}
+
+h2 {
+    font-size: 1.875rem;
+    margin-bottom: 1.5625rem;
+    @include breakpoint-up(large) {
+        font-size: 2.25rem;
+        margin-bottom: 2.25rem;
+    }
+}
+
+a, a:visitied, a:hover {
+    text-decoration: none;
+}
+
+// Spacing
+.container { // helper class 
+    // 좌우 패딩을 부여하는 클래스로 각 영역 태그별로 해당 클래스를 참조할 수 있도록 한다.
+    max-width: 69.375rem; // 브라우저 크기가 아무리 커지더라도 1113px까지만 늘어나고
+    margin: 0 auto; // 이것은 가운데에 계속 위치한다. 
+    
+    // 클래스 용도에 대한 가독성을 높이기 위해 패딩 위치를 명확히 명시한다. 
+
+    &--pall {
+        padding-left:1.5rem;
+        padding-right:1.5rem;
+        padding-top: 4.375rem;
+        padding-bottom: 4.375rem;
+
+        @include breakpoint-up(large) {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+        }
+    }
+
+    &--py {
+        padding-left:1.5rem;
+        padding-right:1.5rem;
+    }
+
+    &--px {
+        padding-top: 4.375rem;
+        padding-bottom: 4.375rem;
+
+        @include breakpoint-up(large) {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+        }
+    }
+
+    &--pt {
+        padding-top: 4.375rem;
+
+        @include breakpoint-up(large) {
+            padding-top: 6rem;
+        }
+    }
+
+    &--pr {
+        padding-right:1.5rem;
+    }
+
+    &--pb {
+        padding-bottom: 4.375rem;
+
+        @include breakpoint-up(large) {
+            padding-bottom: 6rem;
+        }
+    }
+
+    &--pl {
+        padding-left:1.5rem;
+    }
+}
+
+// Flexbox with nested class
+.flex {
+    display:flex;
+
+    &-jc-sb {
+        justify-content: space-between;
+    }
+
+    &-jc-c {
+        justify-content: center;
+    }
+
+    &-ai-c {
+        align-items: center;
+    }
+}
+
+// Buttons
+button, .button {
+    display: inline-block;
+    position: relative;
+    padding: 0.875rem 1.875rem;
+    background: linear-gradient(to right, $limeGreen, $brightCyan); // 버튼 배경색을 왼쪽에서 오른쪽으로 그래디언트 효과를 낼 수 있게 하는 코드. 
+    border: 0;
+    border-radius: 50px;
+    cursor: pointer;
+    color: $white;
+    font-weight: 400; // 텍스트 굵기를 정의. 
+    font-size: $font-sm;
+    text-decoration: none;
+    transition: opacity 300ms ease-in-out;
+
+    // &:hover {
+    //     opacity: 0.75;
+    // }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-radius: 50px;
+        background-color: rgba(255, 255, 255, 0.25);
+        opacity: 0;
+        transition: opacity 150ms ease-in-out;
+    }
+
+    &:hover::before {
+        border-radius: 50px;
+        opacity: 1;
+    }
+}
+
+// Visibility
+.hide-for-mobile {
+    // hide for tablet and mobile. (최대한 1023 px 이하까지 넓이가 충족되었을 때 적용.)
+    @include breakpoint-down (medium) {
+        display: none;
+    }
+}
+
+.hide-for-desktop {
+    // hide for desktop viewport width. (적어도 1024px 이상부터 적용.)
+    @include breakpoint-up (large) {
+        display: none;
+    }
+}

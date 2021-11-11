@@ -1,0 +1,27 @@
+@media (min-width: 64em) {
+    // 1024 / 16 = 64em. 픽셀을 em 최소 단위인 16px로 나누어 계산. 
+    // styles go here. 
+
+}
+
+// 640px, 1024px, 1400px
+$breakpoint-up: ("medium": "40em", "large": "64em", "xlarge": "87.5em");
+
+// 639px, 1023px, 1399px
+$breakpoint-down: ("small": "39.9375em", "medium": "63.9375em", "large": "87.4375em");
+
+// 서로 같은 크기에서 충돌하는 일이 없도록 하기 위해 1px씩 차이나게 저장한다. 
+
+@mixin breakpoint-up($size) {
+    @media (min-width: map-get($breakpoint-up, $size)) {
+        @content;
+    }
+}
+// up은 그 이상부터라는 의미로 min-width (최소 너비)를 사용한다. 
+
+@mixin breakpoint-down($size) {
+    @media (max-width: map-get($breakpoint-down, $size)) {
+        @content;
+    }
+}
+// down은 그 최대 여기까지라는 의미로 max-width (최대 너비)를 사용한다. 

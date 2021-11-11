@@ -1,0 +1,53 @@
+.hero {
+    background-color: $veryLightGray;
+
+    .container {
+        @include breakpoint-up(large) { // mixin에서 정의한 바와 같이 1024가 되면 display를 아래와 같이 변경한다. 
+            display:flex;
+            align-items: center;
+        }
+    }
+    
+    &__image {
+        position: relative; // 자식 태그를 absolute로 지정하였다면 반드시 relative로 해줘야 한다. 
+        background-image: url('/images/bg-intro-mobile.svg');
+        background-size: cover; // 정해진 width만큼 이미지를 덮는다. 
+        background-repeat: no-repeat;
+        background-position: center center; // horizontal-center vertical-center를 의미한다. 
+        min-height: 17.5rem;
+
+        @include breakpoint-up(large) { 
+            flex: 3;
+            order: 2; // 부모 태그에서 display:flex 선언 시 자식 태그들끼리 순서를 정할 수 있다. 왼쪽부터 차례로 정렬한다. 
+            min-height: 41rem;
+            background-image: url('/images/bg-intro-desktop.svg');
+            background-position: left center;
+        }
+
+        &::before {
+            content: ""; // position을 absolute로 하였다면 반드시 content는 비워둬야 한다. content 안에 글자를 넣으면 배경으로 깔린 이미지 위에 글자가 나타나게 된다. 
+            position: absolute; // 자식 태그의 position: absolute;로 지정하였다면 부모는 반드시 position:relative를 해야한다. 부모 태그를 relative로 지정하지 않으면 자식 태그가 위치를 못잡고 무조건 부모 태그 맨 위로 올라오게 된다. 
+            background-image: url('/images/image-mockups.png');
+            background-size: 93%; // 정해진 width의 93$만 이미지를 덮는다. 
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            width:100%;
+            height: 100%;
+        }
+    }
+
+    &__text {
+        text-align: center;
+
+        @include breakpoint-up(large) {
+            flex: 2;
+            order: 1; 
+            text-align: left;
+        }
+
+        p {
+            line-height: 1.5;
+            margin-bottom: 2.25rem;
+        }
+    }
+}

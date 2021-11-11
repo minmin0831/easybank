@@ -1,0 +1,70 @@
+.articles {
+    background-color: $veryLightGray;
+    
+}
+
+.article {
+
+    &__grid {
+        display: grid;
+        gap: 1.875rem;
+        grid-template-columns: repeat(auto-fit, minmax(14.375rem, 1fr));
+        // 브라우저 크기에 따라 최소 크기보다 작지 않게 채울수 있는 만큼만 컬럼을 추가한다. 
+        // autofill: 브라우저 크기가 늘어나도 컬럼 크기는 유지
+        // autofit: 브라우저 크가기 늘어남에 따라 부모 width에 맞춰 늘어남. 
+
+        // grid-template-columns: 1fr; // grid 레이아웃 템플릿. 1fr은 컬럼 1개에 1개의 아이템을 갖는다. 
+
+        // @include breakpoint-up(medium) {
+        //     grid-template-columns: repeat(2, 1fr);
+        // }
+
+        // @include breakpoint-up(large) {
+        //     grid-template-columns: repeat(4, 1fr);
+        // }
+    }
+
+    &__item {
+        background-color: $white;
+        text-decoration: none;
+        border-radius: 0.3125rem;
+        overflow: hidden;
+        box-shadow: 0px 3px 12px rgba(0,0,0,0.15);
+        transition: all 150ms ease-in-out; // 모든 요소에 대해 0.15초 정도 후에 ease-in-out 방식으로 transition하라는 코드이다. 
+        &:hover {
+            transform: scale(1.05); // transform 형식으로 scale (크기 변형)을 선택한다. 방식은 위에서 정의한 transition 코딩을 따른다. 
+        }
+    }
+
+    &__image {
+        height: 12.5rem;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    &__text {
+        padding: 1.875rem 1.875rem 2.5rem 1.875rem;
+        color: $grayishBlue;
+
+        @include breakpoint-up(medium) {
+            padding: 1.875rem 1.5625rem;
+        }
+    }
+
+    &__author {
+        font-size: 0.625rem;
+        margin-bottom: 0.75rem;
+    }
+
+    &__title {
+        font-size: 1.0625rem;
+        line-height: 1.2;
+        color: $darkBlue;
+        margin-bottom: 0.5rem;
+    }
+
+    &__description {
+        font-size: 0.8125rem;
+    }
+}
