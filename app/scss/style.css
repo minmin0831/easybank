@@ -370,7 +370,7 @@ button:hover::before, .button:hover::before {
 
 .header__links a::before {
   content: "";
-  display: blcok;
+  display: block;
   position: absolute;
   height: 5px;
   color: #31d35c;
@@ -624,7 +624,7 @@ button:hover::before, .button:hover::before {
         grid-template-columns: repeat(3, 2fr) 3fr;
     -ms-grid-rows: 1fr auto;
         grid-template-rows: 1fr auto;
-        grid-template-areas: "logo links1 links2 cta" "social links1 links2 cta";
+        grid-template-areas: "logo links1 links2 cta" "social links1 links2 cta";
     justify-items: start;
   }
 }
